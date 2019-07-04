@@ -1,0 +1,49 @@
+plugins {
+    id 'io.qameta.allure' version "2.8.1"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.8'
+}
+
+
+
+subprojects {
+
+    apply plugin: 'io.qameta.allure'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    allure {
+        autoconfigure = true
+        configuration = "compile"
+        version = '2.12.1'
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    tasks.withType(Test) {
+        testTask ->
+            testTask.reports.junitXml.enabled = true
+            testTask.reports.html.enabled = false
+            testTask.testLogging.showStackTraces = true
+            testTask.testLogging.exceptionFormat = 'full'
+            testTask.testLogging.showStandardStreams = true
+            testTask.maxParallelForks = 2
+            testTask.forkEvery = 2
+            testTask.systemProperties(
+                    'env': System.properties['env'],
+            )
+            testTask.outputs.upToDateWhen { false }
+    }
+
+}

@@ -1,0 +1,5 @@
+rootProject.name = 'UI-API-Automation-Tests'
+include 'core'
+include 'ui_tests'
+include 'api_tests'
+

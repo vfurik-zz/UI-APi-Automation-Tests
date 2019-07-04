@@ -1,0 +1,16 @@
+ext {
+    selenide = '5.2.4'
+    allure_selenide = '2.12.1'
+}
+
+dependencies {
+    compile project(":core")
+    compile(
+            "com.codeborne:selenide:${selenide}",
+            "io.qameta.allure:allure-selenide:${allure_selenide}"
+    )
+}
+
+task allTests(type: Test) {
+    include('com/google/tests/')
+}

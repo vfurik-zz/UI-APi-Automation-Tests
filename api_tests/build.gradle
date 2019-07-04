@@ -1,0 +1,18 @@
+ext {
+    restAssured = '4.0.0'
+    allureRestAssured = '2.7.0'
+    jacksonCore = '2.9.7'
+}
+
+dependencies {
+    compile project(":core")
+    compile(
+            "io.rest-assured:rest-assured:${restAssured}",
+            "io.qameta.allure:allure-rest-assured:${allureRestAssured}",
+            "com.fasterxml.jackson.core:jackson-core:${jacksonCore}"
+    )
+}
+
+task allTests(type: Test) {
+    include('org/httpbin/tests/')
+}

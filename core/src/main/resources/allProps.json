@@ -1,0 +1,34 @@
+{
+  "environment": [
+    {
+      "name": "dev",
+      "ui_url": "https://www.google.com",
+      "api_url": "http://httpbin.org",
+      "database": {
+        "url": "",
+        "name": "",
+        "password": ""
+      }
+    },
+    {
+      "name": "qa",
+      "ui_url": "https://www.google.com",
+      "api_url": "http://httpbin.org",
+      "database": {
+        "url": "",
+        "name": "",
+        "password": ""
+      }
+    },
+    {
+      "name": "stage",
+      "ui_url": "https://www.google.com",
+      "api_url": "http://httpbin.org",
+      "database": {
+        "url": "",
+        "name": "",
+        "password": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+**/.idea/
+**/build/
+**/out/
+**/gradle/
+**/.allure/
+**/allure-results/
+.gradle/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+log_file.log

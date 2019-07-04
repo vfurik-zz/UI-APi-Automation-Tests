@@ -1,0 +1,1 @@
+Run UI tests: ./gradlew clean :ui_tests:allTests
