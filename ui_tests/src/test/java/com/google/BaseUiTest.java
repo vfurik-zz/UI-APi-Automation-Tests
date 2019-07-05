@@ -8,6 +8,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import com.google.listeners.CustomLogEventListener;
 import com.google.pages.HomePage;
 import com.test.data.PropsController;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j;
 import org.junit.After;
@@ -49,7 +50,7 @@ public class BaseUiTest {
         Selenide.clearBrowserLocalStorage();
     }
 
-    //    @Step
+    @Step
     protected HomePage openHomePage() {
         Selenide.open("/");
         return new HomePage();

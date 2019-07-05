@@ -1,6 +1,6 @@
 ext {
-    selenide = '5.2.4'
-    allure_selenide = '2.12.1'
+    selenide = '5.2.0'
+    allure_selenide = '2.7.0'
 }
 
 dependencies {

@@ -1,24 +1,21 @@
 package com.google.tests;
 
-import com.codeborne.selenide.Selenide;
 import com.google.BaseUiTest;
+import com.google.data_provider.GoogleSearchDataProvider;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class GoogleSearchTest  extends BaseUiTest {
+@RunWith(JUnitParamsRunner.class)
+public class GoogleSearchTest extends BaseUiTest {
 
     @Test
-    public void verifyAutocomplete() {
-        Selenide.open("/");
+    @Parameters(source = GoogleSearchDataProvider.class)
+    public void verifyAutocomplete(String typedValue, String verifyValue) {
         openHomePage().
-                typeSearchText("Selenide")
-                .verifyFirstValueInAutoComplete("Selenide");
+                typeSearchText(typedValue)
+                .verifyFirstValueInAutoComplete(verifyValue);
     }
-
-
-    @Test
-    public void verifyResultPage() {
-        openHomePage().search("Selenide").verifyFirstResult("Selenide");
-    }
-
 
 }

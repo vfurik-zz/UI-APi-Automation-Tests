@@ -6,8 +6,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '4.8'
 }
 
-
-
 subprojects {
 
     apply plugin: 'io.qameta.allure'
@@ -24,7 +22,7 @@ subprojects {
     allure {
         autoconfigure = true
         configuration = "compile"
-        version = '2.12.1'
+        version = '2.7.0'
     }
 
     tasks.withType(JavaCompile) {
