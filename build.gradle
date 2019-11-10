@@ -1,9 +1,10 @@
 plugins {
     id 'io.qameta.allure' version "2.8.1"
+    id "io.franzbecker.gradle-lombok" version "3.2.0"
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.8'
+    gradleVersion = '5.6.1'
 }
 
 subprojects {
@@ -11,6 +12,7 @@ subprojects {
     apply plugin: 'io.qameta.allure'
     apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: 'io.franzbecker.gradle-lombok'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -22,7 +24,10 @@ subprojects {
     allure {
         autoconfigure = true
         configuration = "compile"
-        version = '2.7.0'
+        version = '2.13.0'
+        useJUnit5 {
+            version = '2.13.0'
+        }
     }
 
     tasks.withType(JavaCompile) {
@@ -31,17 +36,26 @@ subprojects {
 
     tasks.withType(Test) {
         testTask ->
-            testTask.reports.junitXml.enabled = true
-            testTask.reports.html.enabled = false
-            testTask.testLogging.showStackTraces = true
-            testTask.testLogging.exceptionFormat = 'full'
-            testTask.testLogging.showStandardStreams = true
-            testTask.maxParallelForks = 2
-            testTask.forkEvery = 2
+            testTask.reports{
+                junitXml.enabled = true
+                html.enabled = false
+            }
+
+            testTask.testLogging{
+                showStackTraces = true
+                exceptionFormat = 'full'
+                showStandardStreams = true
+                events "PASSED", "FAILED", "SKIPPED"
+            }
+
             testTask.systemProperties(
                     'env': System.properties['env'],
+                    'runInDocker': System.properties['runInDocker'],
+                    'allure.link.issue.pattern': 'https://280cap.atlassian.net/browse/{}',
+                    'allure.link.tms.pattern': 'https://280cap.atlassian.net/browse/{}'
             )
             testTask.outputs.upToDateWhen { false }
+            useJUnitPlatform()
     }
 
 }

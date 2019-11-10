@@ -2,6 +2,7 @@ ext {
     restAssured = '4.0.0'
     allureRestAssured = '2.7.0'
     jacksonCore = '2.9.7'
+    junit = '5.5.2'
 }
 
 dependencies {
@@ -10,6 +11,11 @@ dependencies {
             "io.rest-assured:rest-assured:${restAssured}",
             "io.qameta.allure:allure-rest-assured:${allureRestAssured}",
             "com.fasterxml.jackson.core:jackson-core:${jacksonCore}"
+    )
+    testCompile(
+            "org.junit.jupiter:junit-jupiter-api:${junit}",
+            "org.junit.jupiter:junit-jupiter-engine:${junit}",
+            "org.junit.jupiter:junit-jupiter-params:${junit}"
     )
 }
 
