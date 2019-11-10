@@ -2,6 +2,7 @@ ext {
     selenide = '5.5.0'
     allure_selenide = '2.13.0'
     junit = '5.5.2'
+    testrail_api = '2.0.1'
 }
 
 dependencies {
@@ -9,7 +10,8 @@ dependencies {
     compile(
             "com.codeborne:selenide:${selenide}",
             "io.qameta.allure:allure-selenide:${allure_selenide}",
-            "io.qameta.allure:allure-junit5:${allure_selenide}"
+            "io.qameta.allure:allure-junit5:${allure_selenide}",
+            "com.codepine.api:testrail-api-java-client:${testrail_api}"
     )
 
     testCompile(

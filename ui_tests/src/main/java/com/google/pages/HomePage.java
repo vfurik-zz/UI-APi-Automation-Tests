@@ -13,7 +13,7 @@ public class HomePage {
     private By textField = By.cssSelector(".gLFyf.gsfi");
 
    @Step
-    public HomePage typeSearchText(String searchText) {
+    private HomePage typeSearchText(String searchText) {
         $(textField).setValue(searchText);
         return this;
     }

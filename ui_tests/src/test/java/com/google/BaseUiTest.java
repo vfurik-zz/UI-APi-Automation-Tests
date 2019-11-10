@@ -6,18 +6,23 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.junit5.ScreenShooterExtension;
 import com.codeborne.selenide.junit5.TextReportExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.google.pages.MainPage;
-import com.google.utils.selenoid.SelenoidFactory;
+import com.google.pages.HomePage;
+import com.google.utils.testrail.TestRailTestRunWatcher;
 import com.test.data.PropsController;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
+
+import java.lang.reflect.Method;
 
 
 @Log4j
+//@ExtendWith(TestRailTestRunWatcher.class)
 public class BaseUiTest {
 
     final private static boolean runIdDocker;
@@ -28,7 +33,7 @@ public class BaseUiTest {
         runIdDocker = docker != null && docker.equals("true");
         Configuration.baseUrl = PropsController.props.getUiUrlByEnv();
         Configuration.timeout = 12000;
-        Configuration.screenshots = true;
+        Configuration.screenshots = false;
         Configuration.savePageSource = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pollingInterval = 100;
@@ -36,15 +41,15 @@ public class BaseUiTest {
         Configuration.clickViaJs = false;
         // Configuration.proxyEnabled = true;
 
-        if (!runIdDocker) {
-            log.info("Tests are started in Docker containers");
-            Configuration.browser = SelenoidFactory.getSelenoidBrowser();
-        } else {
+//        if (!runIdDocker) {
+//            log.info("Tests are started in Docker containers");
+//            Configuration.browser = SelenoidFirefoxWebDriverProvider.class.getName();
+//        } else {
             log.info("Tests are started locally");
             Configuration.browser = WebDriverRunner.CHROME;
             Configuration.browserSize = "1920x1080";
             System.setProperty("chromeoptions.args", "disable-infobars,disable-popup-blocking,--no-sandbox");
-        }
+//        }
     }
 
     @RegisterExtension
@@ -72,9 +77,8 @@ public class BaseUiTest {
     }
 
     @Step
-    protected MainPage openHomePage() {
+    protected HomePage openHomePage() {
         Selenide.open("/");
-        return new MainPage();
+        return new HomePage();
     }
-
 }

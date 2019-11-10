@@ -1,13 +1,11 @@
 package com.google.tests;
 
-import com.codeborne.selenide.WebDriverRunner;
 import com.google.BaseUiTest;
+import com.google.utils.annotations.CaseID;
+import com.google.utils.testrail.TestRailTestRunWatcher;
 import lombok.extern.log4j.Log4j;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -15,17 +13,26 @@ import static com.codeborne.selenide.Selenide.$$;
 public class SomeTest extends BaseUiTest {
 
     @BeforeEach
-    void beforeEach() {
+    void beforeEach() {}
+
+    @AfterEach
+    void afterEach() {
 
     }
 
     @Tags(value = {@Tag("regression")})
     @Test
-    void test1() {
+    @CaseID(id = 1)
+    void testGoogleSearch() {
         log.info("In test");
-        openHomePage();
-        $$(".sda").shouldHaveSize(2);
-
+        openHomePage()
+                .search("Selenide")
+                .verifyFirstResult("sadasd_FAIL");
     }
 
+    @Test
+    @CaseID(id = 2)
+    void testCase() {
+        System.out.println("test");
+    }
 }
