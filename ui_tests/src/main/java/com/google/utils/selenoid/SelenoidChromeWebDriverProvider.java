@@ -1,6 +1,7 @@
-package com.google.utils;
+package com.google.utils.selenoid;
 
 import com.codeborne.selenide.WebDriverProvider;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,10 +11,22 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URI;
 
-public class SelenoidWebDriverProvider implements WebDriverProvider {
+public class SelenoidChromeWebDriverProvider implements WebDriverProvider {
+
+    private final static String browserVersion;
+
+    static {
+        String envBrowserVersion = System.getProperty("browserVersion");
+        if (StringUtils.isNoneEmpty(envBrowserVersion)) {
+            browserVersion = envBrowserVersion;
+        } else {
+            browserVersion = "78.0";
+        }
+    }
 
     /**
-     * Implementation of custom webdriver provider for running ui tests using Selenoid
+     * Implementation of custom webdriver provider for running ui tests using Selenoid on chrome
+     *
      * @param desiredCapabilities
      * @return
      */
@@ -22,10 +35,15 @@ public class SelenoidWebDriverProvider implements WebDriverProvider {
     public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
         DesiredCapabilities browser = new DesiredCapabilities();
         browser.setBrowserName("chrome");
-        browser.setVersion("75.0");
+        browser.setVersion(browserVersion);
         browser.setCapability("enableVNC", true);
+        browser.setCapability("enableVideo", false);
+        browser.setCapability("videoName", this.getClass().getName() + "1234567111.mp4");
+        browser.setCapability("name", "Chrome version: " + browserVersion);
+
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("disable-infobars");
+
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         options.addArguments("disable-popup-blocking");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-notifications");
@@ -36,7 +54,7 @@ public class SelenoidWebDriverProvider implements WebDriverProvider {
                     URI.create("http://localhost:4444/wd/hub").toURL(),
                     browser
             );
-            driver.manage().window().setSize(new Dimension(1280, 1024));
+            driver.manage().window().setSize(new Dimension(1920, 1080));
             return driver;
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);

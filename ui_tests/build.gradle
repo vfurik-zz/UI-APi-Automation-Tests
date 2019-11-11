@@ -1,16 +1,35 @@
 ext {
-    selenide = '5.2.0'
-    allure_selenide = '2.7.0'
+    selenide = '5.5.0'
+    allure_selenide = '2.13.0'
+    junit = '5.5.2'
+    testrail_api = '2.0.1'
 }
 
 dependencies {
     compile project(":core")
     compile(
             "com.codeborne:selenide:${selenide}",
-            "io.qameta.allure:allure-selenide:${allure_selenide}"
+            "io.qameta.allure:allure-selenide:${allure_selenide}",
+            "io.qameta.allure:allure-junit5:${allure_selenide}",
+            "com.codepine.api:testrail-api-java-client:${testrail_api}"
+    )
+
+    testCompile(
+            "org.junit.jupiter:junit-jupiter-api:${junit}",
+            "org.junit.jupiter:junit-jupiter-engine:${junit}",
+            "org.junit.jupiter:junit-jupiter-params:${junit}",
+            "io.qameta.allure:allure-junit5:${allure_selenide}"
     )
 }
 
-task allTests(type: Test) {
-    include('com/google/tests/')
+task smoke(type: Test) {
+    useJUnitPlatform {
+        includeTags 'smoke'
+    }
+}
+
+task regression(type: Test) {
+    useJUnitPlatform {
+        includeTags 'regression'
+    }
 }

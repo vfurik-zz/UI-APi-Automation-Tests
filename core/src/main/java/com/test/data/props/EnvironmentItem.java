@@ -2,9 +2,6 @@ package com.test.data.props;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import javax.annotation.Generated;
-
 @Data
 public class EnvironmentItem{
 
