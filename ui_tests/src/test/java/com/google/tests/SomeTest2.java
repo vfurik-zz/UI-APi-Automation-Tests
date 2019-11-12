@@ -8,20 +8,19 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 @Log4j
-public class SomeTest extends BaseUiTest {
+public class SomeTest2 extends BaseUiTest {
 
     @Tags(value = {@Tag("regression11")})
     @Test
-    void test11() {
+    void test1() {
         log.info("In test");
         openHomePage();
-        $(".iblpc").shouldBe(Condition.visible);
-        $("[class='gLFyf gsfi']").setValue("qwerty").pressEnter();
-        Selenide.sleep(5000);
-
+        $(byXpath("//*[contains(text(),'Головне')]")).shouldBe(Condition.visible);
     }
+
 
 }

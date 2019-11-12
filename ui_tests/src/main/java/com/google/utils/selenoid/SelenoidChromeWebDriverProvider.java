@@ -38,7 +38,6 @@ public class SelenoidChromeWebDriverProvider implements WebDriverProvider {
         browser.setVersion(browserVersion);
         browser.setCapability("enableVNC", true);
         browser.setCapability("enableVideo", true);
-        browser.setCapability("videoName", this.getClass().getName() + "1234567111.mp4");
         browser.setCapability("name", "Chrome version: " + browserVersion);
 
         ChromeOptions options = new ChromeOptions();

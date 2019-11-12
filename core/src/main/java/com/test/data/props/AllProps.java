@@ -11,4 +11,7 @@ public class AllProps {
     @JsonProperty("environment")
     private List<EnvironmentItem> environment;
 
+    @JsonProperty("selenoid_url")
+    private String selenoidUrl;
+
 }

@@ -29,12 +29,13 @@ public class SelenoidFirefoxWebDriverProvider implements WebDriverProvider {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("firefox");
-        capabilities.setVersion("69.0");
+        capabilities.setVersion(browserVersion);
         capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
+        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("name", "Firefox version: " + browserVersion);
         try {
             RemoteWebDriver driver = new RemoteWebDriver(
-                    URI.create("http://selenoid:4444/wd/hub").toURL(),
+                    URI.create("http://localhost:4444/wd/hub").toURL(),
                     capabilities
             );
             return driver;

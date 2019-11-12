@@ -14,7 +14,7 @@ public class BaseAction {
         RestAssured.filters(new AllureRestAssured());
         RestAssured.responseSpecification = new ResponseSpecBuilder()
                 .expectStatusCode(200)
-                //  .expectContentType(ContentType.JSON) //add this line if needed
+                //  .expectContentType(ContentType.JSON)
                 .build();
     }
 

@@ -34,6 +34,10 @@ public class PropsController {
         return filterContentByEnv(BaseEndpoint.env).getDatabase();
     }
 
+    public String getSelenoidUrl(){
+        return this.allProps.getSelenoidUrl();
+    }
+
     public String getApiUrlByEnv() {
         return filterContentByEnv(BaseEndpoint.env).getApiUrl();
     }

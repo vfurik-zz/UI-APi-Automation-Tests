@@ -1,11 +1,11 @@
 ext {
-    selenide = '5.5.0'
+    selenide = '5.3.0'
     allure_selenide = '2.13.0'
     junit = '5.5.2'
 }
 
 dependencies {
-    compile project(":core")
+    compile project(":core"), project(":api_tests")
     compile(
             "com.codeborne:selenide:${selenide}",
             "io.qameta.allure:allure-selenide:${allure_selenide}",
@@ -15,8 +15,7 @@ dependencies {
     testCompile(
             "org.junit.jupiter:junit-jupiter-api:${junit}",
             "org.junit.jupiter:junit-jupiter-engine:${junit}",
-            "org.junit.jupiter:junit-jupiter-params:${junit}",
-            "io.qameta.allure:allure-junit5:${allure_selenide}"
+            "org.junit.jupiter:junit-jupiter-params:${junit}"
     )
 }
 
@@ -28,6 +27,6 @@ task smoke(type: Test) {
 
 task regression(type: Test) {
     useJUnitPlatform {
-        includeTags 'regression'
+        includeTags 'regression11'
     }
 }

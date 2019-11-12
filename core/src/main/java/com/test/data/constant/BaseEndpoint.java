@@ -28,9 +28,5 @@ public class BaseEndpoint {
         log.info("Base UI URL is: " + baseUIUrl);
     }
 
-    public static void main(String[] args) {
-        new BaseEndpoint();
-    }
-
 }
 
